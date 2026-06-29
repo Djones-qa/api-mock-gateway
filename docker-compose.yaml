@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  api-mock-gateway:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "${MOCK_GW_PORT:-3000}:${MOCK_GW_PORT:-3000}"
+    volumes:
+      - ./mocks:/app/mocks:ro
+    environment:
+      - PORT=${MOCK_GW_PORT:-3000}
+      - MOCK_GW_PORT=${MOCK_GW_PORT:-3000}
+      - MOCK_GW_MOCK_DIR=./mocks/
+      - MOCK_GW_LOG_CAPACITY=${MOCK_GW_LOG_CAPACITY:-1000}
+      - MOCK_GW_CHAOS_ENABLED=${MOCK_GW_CHAOS_ENABLED:-false}
+    restart: unless-stopped

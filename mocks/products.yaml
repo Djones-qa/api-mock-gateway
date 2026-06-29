@@ -1,0 +1,18 @@
+- method: GET
+  path: /products
+  response:
+    status: 200
+    headers:
+      Content-Type: application/json
+    body: |
+      [{"id": "p1", "name": "Widget", "price": 9.99}, {"id": "p2", "name": "Gadget", "price": 19.99}]
+    template: false
+
+- method: GET
+  path: /products/:id
+  response:
+    status: 200
+    headers:
+      Content-Type: application/json
+    body: |
+      {"id": "{{params.id}}", "name": "Product {{params.id}}", "price": 9.99}

@@ -1,0 +1,27 @@
+- method: GET
+  path: /users
+  response:
+    status: 200
+    headers:
+      Content-Type: application/json
+    body: |
+      [{"id": "1", "name": "Alice"}, {"id": "2", "name": "Bob"}]
+    template: false
+
+- method: GET
+  path: /users/:id
+  response:
+    status: 200
+    headers:
+      Content-Type: application/json
+    body: |
+      {"id": "{{params.id}}", "name": "User {{params.id}}", "createdAt": "{{timestamp}}"}
+
+- method: POST
+  path: /users
+  response:
+    status: 201
+    headers:
+      Content-Type: application/json
+    body: |
+      {"id": "{{uuid}}", "name": "{{body.name}}", "createdAt": "{{timestamp}}"}
